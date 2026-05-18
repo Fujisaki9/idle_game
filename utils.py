@@ -136,7 +136,7 @@ def mostrar_atributos_heroi(heroi):
     table.add_section()
 
     equipamentos_heroi = [heroi.arma, heroi.armadura, heroi.acessorio]
-    atributos = ["ATK", "DEF", "HP"]
+    atributos = ["ATK:", "DEF:", "HP:"]
     cores = {"epico": "bold yellow", "unico": "bold magenta", "lendario": "bold red"}
 
     for item, atributo in zip(equipamentos_heroi, atributos):   # Itera 2 listas ao mesmo tempo
