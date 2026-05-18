@@ -99,11 +99,11 @@ def processar_recompensas(heroi, inimigo, inventario) -> bool:
         rprint(f"[bold #FF8C00]+ {inimigo.recompensa_xp} XP[/]")
         rprint(f"[bold yellow]+ {inimigo.recompensa_ouro} Ouro[/]")
         sleep(0.5)
-        xp_necessaria = int((heroi.nivel ** 1.2) * 100)
+        xp_necessaria = int((heroi.nivel ** 1.2) * 40)
         while heroi.xp >= xp_necessaria:
             heroi.xp -= xp_necessaria
             heroi.aumentar_atributos()
-            xp_necessaria = int((heroi.nivel ** 1.2) * 100)
+            xp_necessaria = int((heroi.nivel ** 1.2) * 40)
     return combate
 
 
