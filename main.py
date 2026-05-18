@@ -5,7 +5,7 @@ import copy, utils, database, save, game, services
 
 def main():
     # Cria o objeto heroi -> Classe Heroi.
-    heroi = Heroi(nome = "Fujisaki")
+    heroi = Heroi(nome = input("Insira o nome do seu personagem: ").strip())
 
     # Cria um dicionario que armazena objetos da Classe Inventario e Classe Item
     inventario = dict()
