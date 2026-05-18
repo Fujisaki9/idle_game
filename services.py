@@ -23,7 +23,7 @@ def gerar_barras(heroi, inimigo, log):
     conteudo = Group(f"{heroi.nome:<20} :heart: {max(0, heroi.hp)}/{heroi.hp_max}", barra_heroi,
                      f"\n{inimigo.nome:<20} :heart: {max(0, inimigo.hp)}/{inimigo.hp_max}", barra_inimigo,
                      f"\nNível: {heroi.nivel} | Ouro: {heroi.ouro}",
-                     f"Exp atual: {heroi.xp} | Exp necessária: {int((heroi.nivel ** 1.2) * 100)}"
+                     f"Exp atual: {heroi.xp} | Exp necessária: {int((heroi.nivel ** 1.2) * 40)}"
                      "",
                      "",
                      texto_log
