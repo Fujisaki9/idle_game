@@ -1,4 +1,6 @@
-class Entidade:
+from abc import ABC
+
+class Entidade(ABC):
     """
     Classe base para todos os personagens do jogo.
     Define os atributos fundamentais de combate compartilhados entre o herói e os inimigos.
