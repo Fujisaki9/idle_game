@@ -38,3 +38,11 @@ Um jogo RPG idle desenvolvido em console como projeto de aprendizado de **Progra
 ---
 
 Desenvolvido por **Celso Henrique Pereira Benassi**.
+
+## Aprendizados
+
+- Fundamentos da POO: classes, herança, abstração, encapsulamento, composição, polimorfismo.
+- Funcionalidades de algumas bibliotecas.
+- Validação de inputs do usuário.
+- Organização do código em múltiplos arquivos.
+- Sistema de save utilizando arquivo .json.
