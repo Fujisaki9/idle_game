@@ -1,5 +1,5 @@
 from zone import Zona
-from codex import Codex, RequisitoMateriais, Recompensa
+from crafting import Codex, RequisitoMateriais, Recompensa
 from characters import Inimigo
 from inventory import Item
 
