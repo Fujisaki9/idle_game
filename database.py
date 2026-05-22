@@ -1,4 +1,5 @@
 from zone import Zona
+from codex import Codex, RequisitoMateriais, Recompensa
 from characters import Inimigo
 from inventory import Item
 
@@ -198,4 +199,142 @@ def criar_zonas() -> list:
         Zona("Floresta Amaldiçoada", 50, [arvore, espectro], boss = boss_floresta_2),
         Zona("Templo do Trovão", 65, [golem_eletrico, guardiao], boss = boss_templo),
         Zona("Portal do Caos", 80, [demonios, guardiao_sombrio], boss = boss_caos)
+    ]
+
+
+def criar_codex() -> list:
+    """
+    Cria os objetos da classe Codex com seus requisitos e recompensas.
+    :return: Lista de objetos da classe Codex.
+    """
+    instinto_1 = RequisitoMateriais("pele_de_lobo", 20)
+    instinto_2 = RequisitoMateriais("garra_de_lobo", 15)
+    instinto_3 = RequisitoMateriais("pele_de_goblin", 20)
+
+    sangue_1 = RequisitoMateriais("sangue_de_morcego", 25)
+    sangue_2 = RequisitoMateriais("asa_de_morcego", 20)
+    sangue_3 = RequisitoMateriais("caveira_de_esqueleto", 15)
+
+    muralha_1 = RequisitoMateriais("pedra_do_troll", 12)
+    muralha_2 = RequisitoMateriais("osso_de_esqueleto", 30)
+    muralha_3 = RequisitoMateriais("nucleo_do_golem", 8)
+
+    presas_1 = RequisitoMateriais("dente_de_goblin", 25)
+    presas_2 = RequisitoMateriais("garra_de_lobo", 20)
+    presas_3 = RequisitoMateriais("fragmento_de_pedra_magica", 10)
+
+    essencia_1 = RequisitoMateriais("ectoplasma", 30)
+    essencia_2 = RequisitoMateriais("essencia_fantasmagorica", 20)
+    essencia_3 = RequisitoMateriais("osso_amaldicoado", 20)
+
+    chama_1 = RequisitoMateriais("cristal_de_fogo", 25)
+    chama_2 = RequisitoMateriais("cinza_elemental", 20)
+    chama_3 = RequisitoMateriais("coracao_do_troll", 8)
+
+    pele_1 = RequisitoMateriais("pele_de_ogro_vulcanico", 20)
+    pele_2 = RequisitoMateriais("escama_de_hidra", 10)
+    pele_3 = RequisitoMateriais("fragmento_de_pedra_magica", 12)
+
+    arte_1 = RequisitoMateriais("grimorio_sombrio", 6)
+    arte_2 = RequisitoMateriais("alma_do_necromante", 5)
+    arte_3 = RequisitoMateriais("carne_putrefata", 30)
+
+    garras_1 = RequisitoMateriais("garra_de_wyvern", 15)
+    garras_2 = RequisitoMateriais("dente_de_ogro", 20)
+    garras_3 = RequisitoMateriais("escama_de_wyvern", 20)
+
+    veneno_1 = RequisitoMateriais("veneno_de_hidra", 12)
+    veneno_2 = RequisitoMateriais("veneno_de_serpente", 20)
+    veneno_3 = RequisitoMateriais("ectoplasma", 25)
+
+    alma_1 = RequisitoMateriais("alma_do_cavaleiro", 10)
+    alma_2 = RequisitoMateriais("fragmento_de_armadura_negra", 25)
+    alma_3 = RequisitoMateriais("nucleo_de_golem", 8)
+
+    tita_1 = RequisitoMateriais("coracao_de_lava", 5)
+    tita_2 = RequisitoMateriais("escama_de_hidra", 15)
+    tita_3 = RequisitoMateriais("cristal_de_fogo", 30)
+    tita_4 = RequisitoMateriais("cinza_elemental", 25)
+
+    coracao_1 = RequisitoMateriais("coracao_de_dragao", 5)
+    coracao_2 = RequisitoMateriais("escama_do_dragao_anciao", 12)
+    coracao_3 = RequisitoMateriais("dente_do_dragao_anciao", 10)
+
+    veu_1 = RequisitoMateriais("essencia_do_espectro", 20)
+    veu_2 = RequisitoMateriais("fragmento_espectral", 20)
+    veu_3 = RequisitoMateriais("alma_do_necromante", 8)
+    veu_4 = RequisitoMateriais("essencia_da_morte", 5)
+
+    senhor_1 = RequisitoMateriais("essencia_abissal", 8)
+    senhor_2 = RequisitoMateriais("olho_do_kraken", 6)
+    senhor_3 = RequisitoMateriais("tentaculo_do_kraken", 10)
+    senhor_4 = RequisitoMateriais("escama_de_serpente", 30)
+
+    rei_1 = RequisitoMateriais("coroa_do_rei_espectro", 3)
+    rei_2 = RequisitoMateriais("alma_do_rei", 5)
+    rei_3 = RequisitoMateriais("essencia_real_espectral", 3)
+    rei_4 = RequisitoMateriais("seiva_sombria", 20)
+
+    trovao_1 = RequisitoMateriais("essencia_do_trovao_primordial", 5)
+    trovao_2 = RequisitoMateriais("cristal_do_trovao", 15)
+    trovao_3 = RequisitoMateriais("fragmento_do_trovao", 20)
+    trovao_4 = RequisitoMateriais("nucleo_eletrico", 15)
+
+    legado_1 = RequisitoMateriais("alma_do_tita", 4)
+    legado_2 = RequisitoMateriais("fragmento_do_martelo_do_tita", 6)
+    legado_3 = RequisitoMateriais("essencia_do_trovao_primordial", 3)
+    legado_4 = RequisitoMateriais("cristal_do_trovao", 20)
+
+    frag_1 = RequisitoMateriais("cristal_do_caos", 20)
+    frag_2 = RequisitoMateriais("essencia_demoniaca", 15)
+    frag_3 = RequisitoMateriais("fragmento_sombrio", 20)
+    frag_4 = RequisitoMateriais("alma_sombria", 20)
+
+    caos_1 = RequisitoMateriais("essencia_do_caos_primordial", 3)
+    caos_2 = RequisitoMateriais("coroa_do_caos", 3)
+    caos_3 = RequisitoMateriais("alma_do_lorde_do_caos", 4)
+    caos_4 = RequisitoMateriais("coroa_do_rei_espectro", 2)
+    caos_5 = RequisitoMateriais("coracao_de_dragao", 3)
+
+    return [
+        Codex("instinto_selvagem", [instinto_1, instinto_2, instinto_3],
+              Recompensa(xp_bonus = 0.05)),
+        Codex("sangue_das_cavernas", [sangue_1, sangue_2, sangue_3],
+              Recompensa(ouro_bonus = 0.05)),
+        Codex("muralha_bruta", [muralha_1, muralha_2, muralha_3],
+              Recompensa(defesa = 0.08)),
+        Codex("presas_da_floresta", [presas_1, presas_2, presas_3],
+              Recompensa(ataque = 0.05)),
+        Codex("essencia_sombria", [essencia_1, essencia_2, essencia_3],
+              Recompensa(ataque = 0.08)),
+        Codex("chama_interior", [chama_1, chama_2, chama_3],
+              Recompensa(ataque = 0.10)),
+        Codex("pele_vulcanica", [pele_1, pele_2, pele_3],
+              Recompensa(hp_max = 0.10)),
+        Codex("arte_da_necromancia", [arte_1, arte_2, arte_3],
+              Recompensa(xp_bonus = 0.08, ouro_bonus = 0.05)),
+        Codex("garras_do_predador", [garras_1, garras_2, garras_3],
+              Recompensa(chance_critico = 0.08)),
+        Codex("veneno_eterno", [veneno_1, veneno_2, veneno_3],
+              Recompensa(ataque = 0.10, chance_critico = 0.05)),
+        Codex("alma_forjada", [alma_1, alma_2, alma_3],
+              Recompensa(defesa = 0.12)),
+        Codex("tita_de_lava", [tita_1, tita_2, tita_3, tita_4],
+              Recompensa(ataque = 0.15, defesa = 0.05)),
+        Codex("coracao_draconico", [coracao_1, coracao_2, coracao_3],
+              Recompensa(ataque = 0.20, hp_max = 0.10)),
+        Codex("veu_espectral", [veu_1, veu_2, veu_3, veu_4],
+              Recompensa(defesa = 0.15, hp_max = 0.10)),
+        Codex("senhor_do_abismo", [senhor_1, senhor_2, senhor_3, senhor_4],
+              Recompensa(xp_bonus = 0.10, ouro_bonus = 0.20)),
+        Codex("rei_das_sombras", [rei_1, rei_2, rei_3, rei_4],
+              Recompensa(xp_bonus = 0.20, ouro_bonus = 0.10)),
+        Codex("trovao_primordial", [trovao_1, trovao_2, trovao_3, trovao_4],
+              Recompensa(chance_critico = 0.25, dano_critico = 0.15)),
+        Codex("legado_do_tita", [legado_1, legado_2, legado_3, legado_4],
+              Recompensa(ataque = 0.20, defesa = 0.15)),
+        Codex("fragmento_do_caos", [frag_1, frag_2, frag_3, frag_4],
+              Recompensa(ataque = 0.15, chance_critico = 0.10, dano_critico = 0.10)),
+        Codex("caos_absoluto", [caos_1, caos_2, caos_3, caos_4, caos_5],
+              Recompensa(ataque = 0.30, defesa = 0.10, hp_max = 0.15))
     ]

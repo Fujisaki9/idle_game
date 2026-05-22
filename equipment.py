@@ -2,6 +2,15 @@ class Equipamento:
     """
     Representa os equipamentos do herói (Arma, Armadura e Acessório).
     Contém o sistema de progressão de nível e raridade dos equipamentos.
+    :param nome: Nome do equipamento.
+    :param bonus_1: Bônus de atributo por nivel (01 - 10).
+    :param bonus_2: Bônus de atributo por nivel (11 - 20).
+    :param bonus_3: Bônus de atributo por nivel (21 - 30).
+    :param bonus_4: Bônus de atributo por nivel (31 - 40).
+    :param bonus_5: Bônus de atributo por nivel (41 - 50).
+    :param bonus_6: Bônus de atributo por nivel (51 - 60).
+    :param raridade: Raridade do equipamento. Padrão: comum.
+    :param nivel_max: Nível máximo do equipamento. Padrão: 30.
     """
     def __init__(self, nome, bonus_1, bonus_2, bonus_3, bonus_4, bonus_5, bonus_6, raridade ="comum", nivel_max = 30):
         self.nome = nome

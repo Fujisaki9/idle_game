@@ -93,9 +93,10 @@ def mostrar_menu_principal():
     table.add_row(Align.left("[2] Aprimorar Equipamentos"))
     table.add_row(Align.left("[3] Forja"))
     table.add_row(Align.left("[4] Abrir Inventário"))
-    table.add_row(Align.left("[5] Escolher zona"))
-    table.add_row(Align.left("[6] Continuar"))
-    table.add_row(Align.left("[7] Sair do jogo"))
+    table.add_row(Align.left("[5] Abrir Codex"))
+    table.add_row(Align.left("[6] Escolher zona"))
+    table.add_row(Align.left("[7] Continuar"))
+    table.add_row(Align.left("[8] Sair do jogo"))
     console = Console()
     console.print(table)
 
@@ -133,6 +134,8 @@ def mostrar_atributos_heroi(heroi):
     table.add_row(Align.left("Defesa total (DEF)"), Align.right(str(heroi.defesa)))
     table.add_row(Align.left("HP total (HP)"), Align.right(str(heroi.hp_max)))
     table.add_row(Align.left("HP Atual"), Align.right(str(heroi.hp)))
+    table.add_row(Align.left("Chance de Crítico"), Align.right(str(int(heroi.chance_critico * 100))))
+    table.add_row(Align.left("Dano Crítico"), Align.right(str(int(heroi.dano_critico * 100))))
     table.add_section()
 
     equipamentos_heroi = [heroi.arma, heroi.armadura, heroi.acessorio]
@@ -170,7 +173,8 @@ def mostrar_tabela_zonas(zonas):
         else:
             status = "[bold red]Bloqueado[/]"
         table.add_row(Align.left(f"[{indice}] {zona.nome_zona}"), str(zona.nivel_minimo), status)
-    table.add_row(Align.left(f"[bold red][{len(zonas) + 1}] Voltar[/]"), "-", "-")
+    table.add_section()
+    table.add_row(Align.left(f"[bold #FF8C00][{len(zonas) + 1}] VOLTAR[/]"), "-", "-")
 
     console.print(table)
 
@@ -214,5 +218,88 @@ def mostrar_itens_inventario(inventario):
                       str(item.quantidade_item),
                       str(item.preco_unitario),
                       str(item.preco_total))
-    table.add_row(Align.left(f"[bold red][{len(inventario) + 1}] Voltar[/]"), "-", "-", "-")
+    table.add_section()
+    table.add_row(Align.left(f"[bold #FF8C00][{len(inventario) + 1}] VOLTAR[/]"), "-", "-", "-")
+    console.print(table)
+
+
+def mostrar_codex(codex):
+    """
+    Exibe o Codex, mostrando as coleções, materiais necessários, recompensas e status de conclusão.
+    :param codex: Lista de objetos da classe Codex.
+    :return: None
+    """
+    console = Console(width = 120)
+    table = Table(style = 'yellow')
+    table.add_column("COLEÇÕES", justify = 'center', vertical = 'middle')
+    table.add_column("MATERIAIS", justify = 'center')
+    table.add_column("RECOMPENSAS", justify = 'center', vertical = 'middle')
+    table.add_column("STATUS", justify = 'center', vertical = 'middle')
+    for colecao in codex:
+        if colecao.conclusao:
+            status = "[bold green]Completo[/]"
+        else:
+            status = "[bold red]Incompleto[/]"
+        materiais = list()
+        for item in colecao.requisitos:
+            materiais.append(str(item))
+        materiais_formatados =  "\n".join(materiais)
+        table.add_row(formatar_strings(colecao.nome_colecao),
+                      materiais_formatados,
+                      str(colecao.recompensa_colecao),
+                      status)
+        table.add_section()
+    console.print(table)
+
+
+def mostrar_indice_codex(codex):
+    """
+    Exibe em uma tabela os nomes das coleções e seus status de conclusão.
+    :param codex: Lista de objetos da classe Codex.
+    :return: None
+    """
+    console = Console()
+    table = Table(style = 'yellow')
+    table.add_column("COLEÇÕES", justify = 'center')
+    table.add_column("STATUS", justify = 'center')
+    for indice, colecao in enumerate(codex, 1):
+        if colecao.conclusao:
+            status = "[bold green]Completo[/]"
+        else:
+            status = "[bold red]Incompleto[/]"
+        table.add_row(Align.left(f"[{str(indice)}] {formatar_strings(colecao.nome_colecao)}"), status)
+    table.add_section()
+    table.add_row(Align.left(f"[bold #FF8C00][{str(len(codex) + 1)}] VOLTAR[/]"))
+    console.print(table)
+
+
+def mostrar_colecao_codex(codex, indice):
+    """
+    Exibe em uma tabela uma coleção específica do Codex.
+    :param codex: Lista de objetos da classe Codex.
+    :param indice: Indica uma coleção específica dentro da lista de coleções.
+    :return: None
+    """
+    console = Console()
+    table = Table(style = 'yellow')
+    table.add_column("COLEÇÕES", justify='center', vertical = 'middle')
+    table.add_column("MATERIAIS", justify='center')
+    table.add_column("RECOMPENSAS", justify='center', vertical='middle')
+    table.add_column("STATUS", justify='center', vertical='middle')
+    colecao = codex[indice - 1]
+    if colecao.conclusao:
+        status = "[bold green]Completo[/]"
+    else:
+        status = "[bold red]Incompleto[/]"
+    materiais = list()
+    for num, item in enumerate(colecao.requisitos, 1):
+        materiais.append(f"[{num}] {str(item)}")
+    materiais_formatados = "\n".join(materiais)
+    table.add_row(formatar_strings(colecao.nome_colecao),
+                  Align.left(materiais_formatados),
+                  str(colecao.recompensa_colecao),
+                  status)
+    table.add_section()
+    table.add_row("-", f"[bold #FF8C00][{str(len(colecao.requisitos) + 1)}] VOLTAR[/]", "-", "-")
+
     console.print(table)

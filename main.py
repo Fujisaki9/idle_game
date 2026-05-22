@@ -10,12 +10,15 @@ def main():
     # Cria um dicionario que armazena objetos da Classe Inventario e Classe Item
     inventario = dict()
 
+    # Cria o objeto codex -> Classe Codex
+    codex = database.criar_codex()
+
     # Cria o objeto zona -> Classe Zona e Classe Inimigo.
     zona = database.criar_zonas()
     fase = 0
 
     # Carrega os dados salvos no arquivo .json
-    carregado, indice_zona = save.carregar_jogo(heroi, zona, inventario)
+    carregado, indice_zona = save.carregar_jogo(heroi, zona, inventario, codex)
     zona_atual = zona[indice_zona]
 
     acessar_menu_principal = False
@@ -65,7 +68,7 @@ def main():
         # Reseta a zona, modifica o status de conclusão e salva os dados no arquivo .json.
         if fase == 10:
             zona_atual.zona_concluida = True
-            save.salvar_jogo(heroi, zona, inventario, indice_zona)
+            save.salvar_jogo(heroi, zona, inventario, indice_zona, codex)
             fase = 0
 
         # Abre o menu principal.
@@ -89,15 +92,19 @@ def main():
                     case 4: # Abre o inventário.
                         game.mostrar_inventario(inventario, heroi)
 
-                    case 5: # Mostra a lista de zonas, o status de conclusão e salva os dados no arquivo .json.
-                        indice_zona, zona_atual = game.escolher_zona(indice_zona, zona, heroi, inventario)
+                    case 5: # Abre o codex e salva as alterações no arquivo .json.
+                        game.abrir_codex(codex, inventario, heroi)
+                        save.salvar_jogo(heroi, zona, inventario, indice_zona, codex)
 
-                    case 6: # Salva os dados no arquivo .json e reinicia a zona.
-                        game.continuar_jogo(heroi, zona, inventario, indice_zona)
+                    case 6: # Mostra a lista de zonas, o status de conclusão e salva os dados no arquivo .json.
+                        indice_zona, zona_atual = game.escolher_zona(indice_zona, zona, heroi, inventario, codex)
+
+                    case 7: # Salva os dados no arquivo .json e reinicia a zona.
+                        game.continuar_jogo(heroi, zona, inventario, indice_zona, codex)
                         break
 
-                    case 7: # Salva os dados no arquivo .json e encerra o jogo.
-                        game.encerrar_jogo(heroi, zona, inventario, indice_zona)
+                    case 8: # Salva os dados no arquivo .json e encerra o jogo.
+                        game.encerrar_jogo(heroi, zona, inventario, indice_zona, codex)
                         encerrar_jogo = True
                         break
 

@@ -8,15 +8,15 @@ from time import sleep
 import utils
 
 
-def gerar_barras(heroi, inimigo, log):
+def gerar_barras(heroi, inimigo, historico):
     """
     Cria uma interface visual, exibindo barras de vida durante o combate.
     :param heroi: Objeto heroi -> classe Heroi.
     :param inimigo: Objeto inimigo -> classe Inimigo.
-    :param log: Histórico de combate coletado.
+    :param historico: Histórico de combate coletado.
     :return: Objeto Group do rich contendo as barras de HP e o log de combate.
     """
-    texto_log = ''.join(log)
+    texto_historico = ''.join(historico)
     barra_heroi = ProgressBar(total=heroi.hp_max, completed=max(0, heroi.hp), width=20)
     barra_inimigo = ProgressBar(total=inimigo.hp_max, completed=max(0, inimigo.hp), width=20)
 
@@ -26,22 +26,22 @@ def gerar_barras(heroi, inimigo, log):
                      f"Exp atual: {heroi.xp} | Exp necessária: {int((heroi.nivel ** 1.2) * 40)}"
                      "",
                      "",
-                     texto_log
+                     texto_historico
                      )
 
     return conteudo
 
 
-def mostrar_hp(heroi, inimigo, log):
+def mostrar_hp(heroi, inimigo, historico):
     """
     Inicializa o painel de exibição em tempo real do combate.
     :param heroi: Objeto heroi -> classe Heroi.
     :param inimigo: Objeto inimigo -> classe Inimigo.
-    :param log: Histórico de combate coletado.
+    :param historico: Histórico de combate coletado.
     :return: Objeto Live do rich que atualiza a interface do combate em tempo real.
     """
     console = Console()
-    return Live(gerar_barras(heroi, inimigo, log), console = console, refresh_per_second = 4)
+    return Live(gerar_barras(heroi, inimigo, historico), console = console, refresh_per_second = 4)
 
 
 def iniciar_combate(heroi, inimigo) -> bool:
@@ -52,33 +52,56 @@ def iniciar_combate(heroi, inimigo) -> bool:
     :return: True (vitória), False (derrota).
     """
     turno = 1
-    log_combate = list()
+    historico_combate = list()
     rprint(f"[bold]Iniciando o combate contra {inimigo.nome}[/]")
     print()
-    with mostrar_hp(heroi, inimigo, log_combate) as live:
+    with mostrar_hp(heroi, inimigo, historico_combate) as live:
         while heroi.verificar_vida() and inimigo.verificar_vida():
-            dano_heroi = max(1, randint(int(heroi.ataque * 0.9), int(heroi.ataque * 1.1)) - inimigo.defesa)
-            dano_minimo = inimigo.ataque * 0.30
-            dano_inimigo = max(int(dano_minimo), randint(int(inimigo.ataque * 0.9), int(inimigo.ataque * 1.1))  - heroi.defesa)
+
+            critico_heroi = random()
+            if critico_heroi <= heroi.chance_critico:
+                dano_heroi = max(1, randint(int((heroi.ataque * heroi.dano_critico) * 0.9),
+                                            int((heroi.ataque * heroi.dano_critico) * 1.1)) - inimigo.defesa)
+                historico_combate.append(f"[bold yellow][Turno {turno}]: {heroi.nome} acertou um CRÍTICO em "
+                                         f"{inimigo.nome} causando {dano_heroi} de dano![/]\n")
+            else:
+                dano_heroi = max(1, randint(int(heroi.ataque * 0.9),
+                                            int(heroi.ataque * 1.1)) - inimigo.defesa)
+                historico_combate.append(f"[bold][Turno {turno}]: {heroi.nome} causou {dano_heroi} de dano em "
+                                         f"{inimigo.nome}.\n")
             inimigo.hp -= dano_heroi
-            log_combate.append(f"[bold][Turno {turno}]: {heroi.nome} causou {dano_heroi} de dano em {inimigo.nome}.\n")
-            live.update(gerar_barras(heroi, inimigo, log_combate))
+            live.update(gerar_barras(heroi, inimigo, historico_combate))
             sleep(0.5)
             turno += 1
+
             if inimigo.verificar_vida():
+                critico_inimigo = random()
+                dano_minimo = inimigo.ataque * 0.30
+                if critico_inimigo <= inimigo.chance_critico:
+                    dano_inimigo = max(int(dano_minimo), randint(int((inimigo.ataque * inimigo.dano_critico) * 0.9),
+                                                                 int((inimigo.ataque * inimigo.dano_critico) * 1.1))
+                                                                 - heroi.defesa)
+                    historico_combate.append(f"[bold red][Turno {turno}]: {inimigo.nome} acertou um golpe CRÍTICO em "
+                                             f"{heroi.nome} causando {dano_inimigo} de dano![/]\n")
+                else:
+                    dano_inimigo = max(int(dano_minimo), randint(int(inimigo.ataque * 0.9),
+                                                                 int(inimigo.ataque * 1.1)) - heroi.defesa)
+                    historico_combate.append(f"[bold][Turno {turno}]: Você sofreu {dano_inimigo} de dano "
+                                             f"de {inimigo.nome}.\n")
                 heroi.hp -= dano_inimigo
-                log_combate.append(f"[bold][Turno {turno}]: Você sofreu {dano_inimigo} de dano de {inimigo.nome}.\n")
-                turno += 1
-                live.update(gerar_barras(heroi, inimigo, log_combate))
+                live.update(gerar_barras(heroi, inimigo, historico_combate))
                 sleep(0.5)
+            turno += 1
+
+
         if heroi.verificar_vida():
-            log_combate.append(f"[bold green]O inimigo {inimigo.nome} foi derrotado![/].\n")
-            live.update(gerar_barras(heroi, inimigo, log_combate))
+            historico_combate.append(f"[bold green]O inimigo {inimigo.nome} foi derrotado![/].\n")
+            live.update(gerar_barras(heroi, inimigo, historico_combate))
             sleep(0.5)
             heroi.hp = min(heroi.hp_max, heroi.hp + heroi.hp_max * 0.30)
         else:
-            log_combate.append(f"[bold red]Você foi morto por {inimigo.nome}[/].\n")
-            live.update(gerar_barras(heroi, inimigo, log_combate))
+            historico_combate.append(f"[bold red]Você foi morto por {inimigo.nome}[/].\n")
+            live.update(gerar_barras(heroi, inimigo, historico_combate))
             sleep(0.5)
     return heroi.verificar_vida()
 
@@ -94,10 +117,10 @@ def processar_recompensas(heroi, inimigo, inventario) -> bool:
     combate = iniciar_combate(heroi, inimigo)
     if combate:
         dropar_itens(inimigo, inventario)
-        heroi.xp += inimigo.recompensa_xp
-        heroi.ouro += inimigo.recompensa_ouro
-        rprint(f"[bold #FF8C00]+ {inimigo.recompensa_xp} XP[/]")
-        rprint(f"[bold yellow]+ {inimigo.recompensa_ouro} Ouro[/]")
+        heroi.xp += inimigo.recompensa_xp * (1 + heroi.xp_bonus)
+        heroi.ouro += inimigo.recompensa_ouro * (1 + heroi.ouro_bonus)
+        rprint(f"[bold #FF8C00]+ {inimigo.recompensa_xp * (1 + heroi.xp_bonus)} XP[/]")
+        rprint(f"[bold yellow]+ {inimigo.recompensa_ouro * (1 + heroi.ouro_bonus)} Ouro[/]")
         sleep(0.5)
         xp_necessaria = int((heroi.nivel ** 1.2) * 40)
         while heroi.xp >= xp_necessaria:

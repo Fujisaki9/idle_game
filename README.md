@@ -18,6 +18,7 @@ Um jogo RPG idle desenvolvido em console como projeto de aprendizado de **Progra
 - **Zonas** — 9 zonas com dificuldade crescente, cada uma com inimigos e um boss final.
 - **Progressão do herói** — Sistema de XP e níveis com ganho de atributos.
 - **Inventário** — Coleta e gerenciamento de materiais dropados pelos inimigos.
+- **Codex** — Sistema de coleções com recompensas específicas permanentes.
 - **Forja** — Sistema de craft de equipamentos épicos, únicos e lendários.
 - **Aprimoramento** — Sistema de upgrade de equipamentos com progressão de atributos por nível.
 - **Save/Load** — Salvamento automático do progresso em arquivo `.json`.

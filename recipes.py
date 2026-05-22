@@ -1,6 +1,5 @@
 import copy
 
-
 def mostrar_recipes(escolha: int) -> dict:
     """
     Contém os recipes dos equipamentos criados na forja e retorna o recipe selecionado.

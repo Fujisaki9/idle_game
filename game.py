@@ -279,13 +279,124 @@ def mostrar_inventario(inventario, heroi):
     utils.limpar_console()
 
 
-def escolher_zona(indice_zona, zona, heroi, inventario) -> tuple:
+def abrir_codex(codex, inventario, heroi):
+    """
+    Gerencia a interação do jogador com o Codex, permitindo inserir materiais nas coleções e aplicar recompensas
+    permanentes ao herói.
+    :param codex: Lista de objetos da classe Codex.
+    :param inventario: Dicionário que contém os objetos da classe Inventário.
+    :param heroi: Objeto heroi -> classe Heroi.
+    :return: None
+    """
+    console = Console()
+    while True:
+        utils.limpar_console()
+        utils.mostrar_codex(codex)
+
+        escolha = utils.validar_pergunta("Deseja inserir algum material no Codex? [S/N]: ")
+        if escolha == 'S':
+
+            while True:
+                utils.limpar_console()
+                utils.mostrar_indice_codex(codex)
+
+                indice = utils.validar_integer("Escolha uma coleção: ")
+
+                if indice <= len(codex):
+                    if not codex[indice - 1].conclusao:
+
+                        while True:
+                            utils.limpar_console()
+                            utils.mostrar_colecao_codex(codex, indice)
+
+                            material = utils.validar_integer("Escolha o material: ")
+
+                            if (material <= len(codex[indice - 1].requisitos) and
+                                    codex[indice - 1].requisitos[material - 1].obtido == False):
+
+                                nome_item = utils.formatar_strings(codex[indice - 1].requisitos[material - 1]
+                                                                   .nome_material)
+
+                                if nome_item not in inventario:
+                                    rprint("[bold red]Você não possui esse material![/]")
+                                    sleep(1)
+                                else:
+                                    quantidade_item = inventario[nome_item].quantidade_item
+                                    while True:
+                                        inserir_material = utils.validar_integer("Quantidade: ")
+                                        inserir_material = min(inserir_material,
+                                                               codex[indice - 1].requisitos[material - 1].quantidade)
+                                        if inserir_material <= quantidade_item:
+                                            rprint("[bold #FF8C00]Material inserido com sucesso![/]")
+                                            sleep(1)
+                                            codex[indice - 1].requisitos[material - 1].quantidade -= inserir_material
+                                            quantidade_material = codex[indice - 1].requisitos[material - 1].quantidade
+                                            if quantidade_material == 0:
+                                                codex[indice - 1].requisitos[material - 1].obtido = True
+
+                                                if all(item.obtido for item in codex[indice - 1].requisitos):
+                                                    codex[indice - 1].conclusao = True
+                                                    rprint(f"[bold #FF8C00]A coleção "
+                                                           f"{utils.formatar_strings(codex[indice - 1].nome_colecao)} "
+                                                           f"foi concluída![/]")
+
+                                                    for atributo, valor in (codex[indice - 1].
+                                                            recompensa_colecao.__dict__.items()):
+                                                        if valor != 0:
+                                                            if atributo in ("xp_bonus", "ouro_bonus"):
+                                                                setattr(heroi, atributo, getattr(heroi, atributo)
+                                                                         + valor)
+                                                            elif atributo == "hp_max":
+                                                                setattr(heroi, atributo, getattr(heroi, atributo)
+                                                                        * (1 + valor))
+                                                                heroi.hp = heroi.hp_max
+                                                            else:
+                                                                setattr(heroi, atributo, getattr(heroi, atributo)
+                                                                        * (1 + valor))
+
+                                            inventario[nome_item].quantidade_item -= inserir_material
+                                            quantidade_item = inventario[nome_item].quantidade_item
+                                            if quantidade_item == 0:
+                                                del inventario[nome_item]
+                                            break
+                                        else:
+                                            rprint("[bold red]Valor inválido![/]")
+                                            sleep(1)
+                            elif material == len(codex[indice - 1].requisitos) + 1:
+                                break
+
+                            else:
+                                if material > len(codex[indice - 1].requisitos):
+                                    rprint("[bold red]Insira um comando válido![/]")
+                                    sleep(1)
+                                else:
+                                    rprint("[bold #FF8C00]Material já cadastrado![/]")
+                                    sleep(1)
+                    else:
+                        rprint(f"[bold #FF8C00]A coleção {utils.formatar_strings(codex[indice - 1].nome_colecao)} "
+                               f"já foi concluída.[/]")
+                        sleep(1)
+                elif indice == len(codex) + 1:
+                    break
+
+                else:
+                    rprint("[bold red]Insira um comando válido![/]")
+                    sleep(1)
+
+        else:
+            break
+    console.input("[bold #FF8C00]Pressione ENTER para voltar ao menu principal.[/]")
+    utils.limpar_console()
+
+
+def escolher_zona(indice_zona, zona, heroi, inventario, codex) -> tuple:
     """
     Exibe as zonas disponíveis e permite ao jogador navegar entre as zonas já desbloqueadas.
     :param indice_zona: Índice da zona atual na lista de zonas.
     :param zona: Lista de objetos da classe Zona.
     :param heroi: Objeto heroi -> classe Heroi.
     :param inventario: Dicionário que contém os objetos da classe Inventário.
+    :param codex: Lista de objetos da classe Codex.
     :return: Tupla contendo o novo indice_zona e zona_atual após a escolha do jogador.
     """
     console = Console()
@@ -300,7 +411,7 @@ def escolher_zona(indice_zona, zona, heroi, inventario) -> tuple:
             if zona_escolhida.zona_concluida and heroi.nivel >= zona_escolhida.nivel_minimo:
                 indice_zona = escolha_zona - 1
                 zona_atual = zona[indice_zona]
-                save.salvar_jogo(heroi, zona, inventario, indice_zona)
+                save.salvar_jogo(heroi, zona, inventario, indice_zona, codex)
                 rprint(f"[bold #FF8C00]Indo para a zona selecionada...[/]")
                 sleep(1)
                 rprint(f"[bold #FF8C00]Zona atual: [{escolha_zona}] {zona_atual.nome_zona}.[/]")
@@ -318,31 +429,33 @@ def escolher_zona(indice_zona, zona, heroi, inventario) -> tuple:
     utils.limpar_console()
     return indice_zona, zona_atual
 
-def continuar_jogo(heroi, zona, inventario, indice_zona):
+def continuar_jogo(heroi, zona, inventario, indice_zona, codex):
     """
     Salva os dados em um arquivo .json e reinicia a zona.
     :param heroi: Objeto heroi -> classe Heroi.
     :param zona: Lista de objetos da classe Zona.
     :param inventario: Dicionário que contém os objetos da classe Inventário.
     :param indice_zona: Índice da zona atual na lista de zonas.
+    :param codex: Lista de objetos da classe Codex.
     :return: None
     """
-    save.salvar_jogo(heroi, zona, inventario, indice_zona)
+    save.salvar_jogo(heroi, zona, inventario, indice_zona, codex)
     rprint(f"[bold #FF8C00]Zona atual: {zona[indice_zona].nome_zona}[/]")
     sleep(1)
     utils.limpar_console()
 
-def encerrar_jogo(heroi, zona, inventario, indice_zona):
+def encerrar_jogo(heroi, zona, inventario, indice_zona, codex):
     """
     Salva os dados em um arquivo .json e finaliza o jogo.
     :param heroi: Objeto heroi -> classe Heroi.
     :param zona: Lista de objetos da classe Zona.
     :param inventario: Dicionário que contém os objetos da classe Inventário.
     :param indice_zona: Índice da zona atual na lista de zonas.
+    :param codex: Lista de objetos da classe Codex.
     :return: None
     """
     utils.limpar_console()
-    save.salvar_jogo(heroi, zona, inventario, indice_zona)
+    save.salvar_jogo(heroi, zona, inventario, indice_zona, codex)
     rprint("[bold blue]Salvando os dados...[/]")
     sleep(1)
     rprint("[bold blue]Encerrando o jogo...[/]")

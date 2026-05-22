@@ -1,11 +1,15 @@
 from random import choice
 import copy
 
-
 class Zona:
     """
     Representa uma zona do jogo contendo inimigos e um boss.
     Controla o acesso às zonas através do nível mínimo exigido e o status de conclusão de cada zona.
+    :param nome_zona: Nome identificador da zona.
+    :param nivel_minimo: Nível mínimo exigido para acessar a zona.
+    :param lista_inimigos: Lista de objetos Inimigo presentes na zona.
+    :param boss: Objeto Inimigo que representa o boss da zona.
+    :param zona_concluida: Indica se o boss da zona foi derrotado. Padrão: False.
     """
     def __init__(self, nome_zona, nivel_minimo, lista_inimigos, boss, zona_concluida: bool = False):
         self.nome_zona = nome_zona
