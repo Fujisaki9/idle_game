@@ -173,7 +173,7 @@ def criar_zonas() -> list:
 
     # Demônio do Caos/Guardião Sombrio: Drops
     cristal_caos = Item("Cristal do Caos", 1, 0.60, 120)
-    essencia_demonio = Item("Essencia Demoníaca", 1, 0.40, 150)
+    essencia_demonio = Item("Essencia Demoniaca", 1, 0.40, 150)
     fragmento_sombrio = Item("Fragmento Sombrio", 1, 0.60, 130)
     alma_sombria = Item("Alma Sombria", 1, 0.40, 160)
 
