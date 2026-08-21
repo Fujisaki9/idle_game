@@ -4,7 +4,7 @@ from rich import print as rprint
 
 from combate.servicos import preparar_combate
 from jogo.servicos import executar_menu_principal, executar_menu_zona_concluida, inicializar_jogo
-from salvar.servicos import salvar_progresso_jogo
+from persistencia.servicos import salvar_progresso_jogo
 from utilitario.console import limpar_console
 
 

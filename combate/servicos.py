@@ -4,7 +4,7 @@ from time import sleep
 from rich import print as rprint
 
 from combate.interface import criar_interface_combate, exibir_interface_combate
-from entidade.inimigo import Inimigo
+from base.inimigo import Inimigo
 from heroi.classe import Heroi
 from heroi.servicos import processar_derrota
 from inventario.classe import Inventario

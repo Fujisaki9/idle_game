@@ -1,5 +1,5 @@
-from entidade.base import Entidade
-from entidade.item import Item
+from base.superclasse import Entidade
+from base.item import Item
 
 
 class Inimigo(Entidade):

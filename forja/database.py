@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from entidade.material import MaterialRequerido
+from base.material import MaterialRequerido
 
 
 def escolher_recipe_forja(indice_escolhido: int) -> dict[int | str, Any]:

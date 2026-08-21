@@ -3,7 +3,7 @@ from rich.console import Console
 from rich.table import Table
 
 from codex.classe import Codex
-from entidade.recompensa import Recompensa
+from base.recompensa import Recompensa
 from utilitario.formatadores import formatar_texto
 
 

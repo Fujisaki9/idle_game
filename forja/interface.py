@@ -2,7 +2,7 @@ from rich.align import Align
 from rich.console import Console
 from rich.table import Table
 
-from entidade.material import MaterialRequerido
+from base.material import MaterialRequerido
 from forja.database import escolher_recipe_forja
 from inventario.classe import Inventario
 from utilitario.formatadores import formatar_texto

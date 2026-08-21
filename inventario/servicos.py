@@ -4,7 +4,7 @@ from time import sleep
 from rich import print as rprint
 from rich.console import Console
 
-from entidade.inimigo import Inimigo
+from base.inimigo import Inimigo
 from heroi.classe import Heroi
 from inventario.classe import Inventario
 from inventario.interface import exibir_inventario, exibir_itens_inventario

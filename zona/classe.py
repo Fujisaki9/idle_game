@@ -1,7 +1,7 @@
 from copy import deepcopy
 from random import choice
 
-from entidade.inimigo import Inimigo
+from base.inimigo import Inimigo
 
 
 class Zona:

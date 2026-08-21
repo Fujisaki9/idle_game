@@ -2,7 +2,7 @@ from time import sleep
 
 from rich import print as rprint
 
-from entidade.equipamento import Equipamento
+from base.equipamento import Equipamento
 from heroi.classe import Heroi
 from heroi.interface import exibir_menu_equipamentos
 from utilitario.console import limpar_console

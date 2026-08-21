@@ -1,5 +1,5 @@
-from entidade.recompensa import Recompensa
-from entidade.material import MaterialRequerido
+from base.recompensa import Recompensa
+from base.material import MaterialRequerido
 
 
 class Codex:

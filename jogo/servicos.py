@@ -12,7 +12,7 @@ from heroi.interface import exibir_atributos_heroi
 from heroi.servicos import aprimorar_equipamentos
 from inventario.classe import Inventario
 from inventario.servicos import abrir_inventario
-from salvar.servicos import carregar_jogo, continuar_jogo, encerrar_jogo, salvar_progresso_jogo
+from persistencia.servicos import carregar_jogo, continuar_jogo, encerrar_jogo, salvar_progresso_jogo
 from utilitario.console import limpar_console
 from utilitario.interface import exibir_menu_principal
 from utilitario.validadores import validar_inteiro

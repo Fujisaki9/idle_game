@@ -7,7 +7,7 @@ from codex.classe import Codex
 from combate.servicos import preparar_combate
 from heroi.classe import Heroi
 from inventario.classe import Inventario
-from salvar.servicos import salvar_progresso_jogo
+from persistencia.servicos import salvar_progresso_jogo
 from utilitario.console import limpar_console
 from utilitario.interface import exibir_menu_principal
 from utilitario.validadores import validar_inteiro

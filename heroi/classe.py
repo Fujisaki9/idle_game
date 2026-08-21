@@ -1,5 +1,5 @@
-from entidade.base import Entidade
-from entidade.equipamento import Equipamento
+from base.superclasse import Entidade
+from base.equipamento import Equipamento
 
 
 class Heroi(Entidade):

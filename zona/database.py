@@ -1,5 +1,5 @@
-from entidade.item import Item
-from entidade.inimigo import Inimigo
+from base.item import Item
+from base.inimigo import Inimigo
 from zona.classe import Zona
 
 

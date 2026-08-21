@@ -2,7 +2,7 @@ from rich.console import Console, Group
 from rich.live import Live
 from rich.progress import ProgressBar
 
-from entidade.inimigo import Inimigo
+from base.inimigo import Inimigo
 from heroi.classe import Heroi
 
 

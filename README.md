@@ -34,16 +34,35 @@ decidi fazer um.
 
 ---
 
+## 📁 Estrutura do projeto
+
+```
+idle_game/
+├── base/           # Superclasse e classes auxiliares.
+├── codex/          # Criação do códex e suas coleções.
+├── combate/        # Dinâmica de combate (cálculos de dano e turnos).
+├── forja/          # Criação de equipamentos, recipes e melhorias.
+├── heroi/          # Instância do jogador, atributos, status e progressão.
+├── inventario/     # Cuida do armazenamento dos itens coletados em combate.
+├── jogo/           # O jogo em si.
+├── persistencia/   # Persistência dos dados em .json.
+├── utilitario/     # Validadores, formatação e funções auxiliares.
+├── zona/           # Criação das zonas e seus respectivos monstros.
+└── main.py                  
+```
+
+
 ## 🚀 Como Executar
 
-1. Certifique-se de ter o **Python** instalado.
-2. Clone o repositório: `git clone https://github.com/Fujisaki9/idle_game.git`.
-3. Instale as dependências: `pip install rich`.
-4. Execute o programa: `python main.py`
+1. Clone o repositório: `git clone https://github.com/Fujisaki9/idle_game.git`.
+2. Instale as dependências: `pip install rich`.
+3. Execute o programa: `python main.py`
 
--> ⚠️ **PyCharm:** Habilite *Emulate terminal in output* em `Run > Edit configurations > Edit configuration templates >
- Python > Modify options` para visualizar a interface colorida.
+> ⚠️ **PyCharm:** Habilite *Emulate terminal in output* em `Run > Edit configurations > Edit configuration templates >
+Python > Modify options` para visualizar a interface colorida.
 
+> ⚠️ O projeto depende da biblioteca `rich` para toda a formatação visual (cores, tabelas, destaque de mensagens).
+Sem ela instalada, o programa não funciona.
 ---
 
 ## Aprendizados
@@ -52,7 +71,7 @@ decidi fazer um.
 - polimorfismo, mas ainda estou buscando os lugares certos para aplicá-los.
 - Funcionalidades de algumas bibliotecas.
 - Validação de inputs do usuário.
-- Organização do código em múltiplos arquivos.
+- Organização do código em múltiplos packages.
 - Sistema de save utilizando arquivo .json.
 
 Desenvolvido por **Celso Henrique Pereira Benassi**.

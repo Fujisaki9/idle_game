@@ -1,6 +1,6 @@
 from codex.classe import Codex
-from entidade.recompensa import Recompensa
-from entidade.material import MaterialRequerido
+from base.recompensa import Recompensa
+from base.material import MaterialRequerido
 
 
 def criar_colecoes_codex() -> list[Codex]:
