@@ -4,7 +4,7 @@ from rich.table import Table
 
 from codex.classe import Codex
 from base.recompensa import Recompensa
-from utilitario.formatadores import formatar_texto
+from utilitario.formatacao import formatar_texto
 
 
 def exibir_tabela_codex(colecoes: list[Codex]):

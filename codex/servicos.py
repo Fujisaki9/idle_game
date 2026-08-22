@@ -8,8 +8,8 @@ from codex.interface import exibir_colecao_escolhida, exibir_status_colecoes, ex
 from heroi.classe import Heroi
 from inventario.classe import Inventario
 from utilitario.console import limpar_console
-from utilitario.formatadores import formatar_texto
-from utilitario.validadores import validar_confirmacao, validar_inteiro
+from utilitario.formatacao import formatar_texto
+from utilitario.validacao import validar_confirmacao, validar_inteiro
 
 
 def acessar_codex(colecoes: list[Codex],

@@ -10,8 +10,7 @@ def validar_inteiro(mensagem: str) -> int:
             valor = int(console.input(f"[bold #FF8C00]{mensagem}[/]"))
             if valor > 0:
                 return valor
-            else:
-                rprint("[bold red]Insira um valor numérico maior que zero![/]")
+            rprint("[bold red]Insira um valor numérico maior que zero![/]")
         except ValueError:
             rprint("[bold red]ERRO: Insira um valor numérico![/]")
 

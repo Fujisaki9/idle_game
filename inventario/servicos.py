@@ -10,7 +10,7 @@ from inventario.classe import Inventario
 from inventario.interface import exibir_inventario, exibir_itens_inventario
 from utilitario.console import limpar_console
 from utilitario.interface import exibir_menu_principal
-from utilitario.validadores import validar_inteiro, validar_confirmacao
+from utilitario.validacao import validar_inteiro, validar_confirmacao
 
 
 def abrir_inventario(inventario: dict[str, Inventario],

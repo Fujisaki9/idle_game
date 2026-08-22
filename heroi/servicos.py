@@ -7,7 +7,7 @@ from heroi.classe import Heroi
 from heroi.interface import exibir_menu_equipamentos
 from utilitario.console import limpar_console
 from utilitario.interface import exibir_menu_principal
-from utilitario.validadores import validar_inteiro
+from utilitario.validacao import validar_inteiro
 from zona.classe import Zona
 
 

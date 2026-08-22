@@ -8,9 +8,9 @@ from forja.interface import exibir_materiais_recipe, exibir_menu_forja, exibir_m
 from heroi.classe import Heroi
 from inventario.classe import Inventario
 from utilitario.console import limpar_console
-from utilitario.formatadores import formatar_texto
+from utilitario.formatacao import formatar_texto
 from utilitario.interface import exibir_menu_principal
-from utilitario.validadores import validar_inteiro, validar_confirmacao
+from utilitario.validacao import validar_inteiro, validar_confirmacao
 
 
 def forjar_equipamentos(heroi: Heroi,

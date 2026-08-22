@@ -5,7 +5,7 @@ from rich.table import Table
 from base.material import MaterialRequerido
 from forja.database import escolher_recipe_forja
 from inventario.classe import Inventario
-from utilitario.formatadores import formatar_texto
+from utilitario.formatacao import formatar_texto
 
 
 def exibir_menu_forja():

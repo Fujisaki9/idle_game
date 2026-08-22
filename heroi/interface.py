@@ -4,7 +4,7 @@ from rich.table import Table
 
 from heroi.classe import Heroi
 from utilitario.console import limpar_console
-from utilitario.formatadores import formatar_porcentagem
+from utilitario.formatacao import formatar_porcentagem
 from utilitario.interface import exibir_menu_principal
 
 def exibir_atributos_heroi(heroi: Heroi):

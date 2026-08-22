@@ -10,7 +10,7 @@ from inventario.classe import Inventario
 from persistencia.servicos import salvar_progresso_jogo
 from utilitario.console import limpar_console
 from utilitario.interface import exibir_menu_principal
-from utilitario.validadores import validar_inteiro
+from utilitario.validacao import validar_inteiro
 from zona.classe import Zona
 from zona.interface import exibir_menu_zonas, exibir_opcoes_repeticao, exibir_tabela_zonas
 
